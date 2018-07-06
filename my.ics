@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+
+PRODID:ics.py - http://git.io/lLljaA
+
+VERSION:2.0
+
+BEGIN:VEVENT
+
+DTSTAMP:20180706T000857Z
+
+DTSTART:20331106T000000Z
+
+DURATION:PT2H
+
+SUMMARY:Mars Landing Party
+
+DESCRIPTION:Starlight Express landing party is a thrilling welcome for newcomers to Mars.
+
+LOCATION:Huygens Crater Base
+
+TRANSP:OPAQUE
+
+UID:4a108f7c-3c5a-4d43-bc36-7079caed30e9@4a10.org
+
+END:VEVENT
+
+END:VCALENDAR
