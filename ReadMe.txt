@@ -5,3 +5,6 @@ Version 1.0 notes:
     - Styling the HTML. Adding a .css file to the source
     - Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
     - Find location functionalty?
+    
+    Version 1.1 notes:
+  - Labels changed to HTML objects
