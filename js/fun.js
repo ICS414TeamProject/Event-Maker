@@ -1,4 +1,4 @@
-var ical = function (){
+var createCalendar = function (){
   var SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
   var calendarStart = [
       'BEGIN:VCALENDAR',
