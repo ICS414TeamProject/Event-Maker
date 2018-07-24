@@ -1,23 +1,55 @@
 <html>
+
   <head>
+
     <script src="js/fun.js" type="text/javascript"></script>
+
   </head>
+
   <body>
+
     <div id="container">
-      <label for="txtTitle">Title</label>
-      <input id="txtTitle" placeholder="Description of the Event..." type="text">
-      <label for="txtDescription">Description</label>
-      <input id="txtDescription" placeholder="Summary of the Event..." type="text">
-      <label for="txtLocation">Location</label>
-      <input id="txtLocation" placeholder="Location of the Event..." type="text">
-      <label for="txtStartDate">Start Date-Time</label>
-      <input id="txtStartDate" type="date" data-date-format="ddMMyyyy">
-      <input id="txtStartTime" type="text">
-      <label for="txtEndDate">End Date-Time</label>
-      <input id="txtEndDate" type="date">
-      <input id="txtEndTime" type="text" placeholder="01">
-      </br>
-      <button id="btnDownload" onclick="ical()">Download</button>
+
+      <div id="header">
+
+        <h1>Calendar Event Creator</h1>
+
+      </div>
+
+      <div id="content">
+
+        <label for="txtTitle">Title</label>
+
+        <input id="txtTitle" placeholder="Description of the Event..." type="text">
+
+        <label for="txtDescription">Description</label>
+
+        <input id="txtDescription" placeholder="Summary of the Event..." type="text">
+
+        <label for="txtLocation">Location</label>
+
+        <input id="txtLocation" placeholder="Location of the Event..." type="text">
+
+        <label for="txtStartDate">Start Date-Time</label>
+
+        <input id="txtStartDate" type="date" data-date-format="ddMMyyyy">
+
+        <input id="txtStartTime" type="text">
+
+        <label for="txtEndDate">End Date-Time</label>
+
+        <input id="txtEndDate" type="date">
+
+        <input id="txtEndTime" type="text" placeholder="01">
+
+        </br>
+
+        <button id="btnDownload" onclick="ical()">Download</button>
+
+      </div>
+
     </div>
+
   </body>
+
 </html>

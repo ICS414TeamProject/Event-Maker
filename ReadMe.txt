@@ -1,10 +1,29 @@
-Version 1.0 notes:
-  - Event download script works with title, description, start date, start time, end date, end time, location variables.
 
-  - To Do:
-    - Styling the HTML. Adding a .css file to the source
-    - Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
-    - Find location functionalty?
-    
-    Version 1.1 notes:
-  - Labels changed to HTML objects
+
+ICS414 Calendar Event Creator by Team Lychee, 2018.
+
+Project by; Selim Karaoglu, Seth Kinel and Thinh Lam.
+
+This project is designed to allow users to fill a form of an event, and download that as a calendar file with .ics file extension.
+
+
+
+Version 1.0 notes:
+
+ - Event download script works with title, description, start date, start time, end date, end time, location variables.
+
+ - To Do:
+
+   - Styling the HTML. Adding a .css file to the source
+
+   - Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
+
+   - Find location functionality?
+
+
+
+Version 1.1 notes:
+
+ - Labels changed to HTML objects
+
+ - Change on design elements in HTML
