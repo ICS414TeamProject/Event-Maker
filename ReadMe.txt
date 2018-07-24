@@ -24,6 +24,8 @@ Version 1.0 notes:
 
 Version 1.1 notes:
 
- - Labels changed to HTML objects
+  - Labels changed to HTML objects
 
- - Change on design elements in HTML
+  - Change on design elements in HTML
+
+  - CSS file added
