@@ -1,0 +1,23 @@
+#container{
+  width: 500px;
+  height: %100;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+#header{
+  width: %100;
+  text-align: center;
+}
+
+h1{
+  font-size: 24pt;
+  color: #111111;
+  vertical-align: center;
+  font-style: italic;
+  font-family: serif;
+  padding: 20px;
+}
