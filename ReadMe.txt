@@ -4,7 +4,6 @@ This project is designed to allow users to fill a form of an event, and download
 
 Version 1.0 notes:
   - Event download script works with title, description, start date, start time, end date, end time, location variables.
-
   - To Do:
     (Done in V-1.1)- Styling the HTML. Adding a .css file to the source
     - Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
@@ -16,3 +15,4 @@ Version 1.1 notes:
   - CSS file added
   - Major design changes
   - Some changes on variables on HTML and JS file
+  - Footer added

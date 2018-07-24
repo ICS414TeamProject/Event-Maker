@@ -1,6 +1,7 @@
 #container{
   width: 500px;
   height: %100;
+  background-color: #cdcdcd;
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
@@ -13,6 +14,13 @@
   text-align: center;
 }
 
+#footer{
+  width: %100;
+  padding-top: 50px;
+  text-align: right;
+  color: #cdcdcd;
+}
+
 h1{
   font-size: 24pt;
   color: #111111;
@@ -20,4 +28,8 @@ h1{
   font-style: italic;
   font-family: serif;
   padding: 20px;
+}
+
+hr{
+  border-color: #cdcdcd;
 }
