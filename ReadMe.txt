@@ -21,3 +21,6 @@ Version 1.1.1
   - Input types changed for Date and Time elements
   - Placeholders added
   - getNow() function added to JS to fill the Date with today's date on page load
+
+Version 1.1.2
+  - Time input fields changed
