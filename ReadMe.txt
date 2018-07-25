@@ -18,7 +18,6 @@ Version 1.1 notes:
   - Footer added
 
 Version 1.1.1
-
   - Input types changed for Date and Time elements
-
   - Placeholders added
+  - getNow() function added to JS to fill the Date with today's date on page load
