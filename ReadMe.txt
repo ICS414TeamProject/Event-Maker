@@ -24,3 +24,4 @@ Version 1.1.1
 
 Version 1.1.2
   - Time input fields changed
+  - Major changes on CSS file and design elements
