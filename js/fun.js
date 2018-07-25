@@ -25,11 +25,17 @@ var getNow = function(){
   var dd = now.getDate();
   var mm = now.getMonth()+1; //January is 0!
   var yyyy = now.getFullYear();
+  if(dd<10) {
+      dd = '0'+dd
+  }
+  if(mm<10) {
+      mm = '0'+mm
+  }
   var hour = now.getHours();
   var minute = now.getMinutes();
   today = mm + '/' + dd + '/' + yyyy;
   document.getElementById('txtStartDate').value = today;
   document.getElementById('txtEndDate').value = today;
-  document.getElementById('txtStartTime').placeholder = hour;
-  document.getElementById('txtEndTime').placeholder = hour;
+  document.getElementById('txtStartTimeHours').placeholder = hour + ": " + minute;
+  document.getElementById('txtEndTimeHours').placeholder = hour + ": " + minute;
 }
