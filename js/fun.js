@@ -36,6 +36,8 @@ var getNow = function(){
   today = mm + '/' + dd + '/' + yyyy;
   document.getElementById('txtStartDate').value = today;
   document.getElementById('txtEndDate').value = today;
-  document.getElementById('txtStartTimeHours').placeholder = hour + ": " + minute;
-  document.getElementById('txtEndTimeHours').placeholder = hour + ": " + minute;
+  document.getElementById('txtStartTimeHours').placeholder = hour;
+  document.getElementById('txtStartTimeMinutes').placeholder = minute;
+  document.getElementById('txtEndTimeHours').placeholder = hour;
+  document.getElementById('txtEndTimeMinutes').placeholder = minute + 1;
 }
