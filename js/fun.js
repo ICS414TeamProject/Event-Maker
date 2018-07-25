@@ -20,3 +20,16 @@ var createCalendar = function (){
   var calendar = calendarStart + SEPARATOR + calendarEvent + SEPARATOR + calendarEnd;
   console.write(calendar);
 }
+var getNow = function(){
+  var now = new Date();
+  var dd = now.getDate();
+  var mm = now.getMonth()+1; //January is 0!
+  var yyyy = now.getFullYear();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  today = mm + '/' + dd + '/' + yyyy;
+  document.getElementById('txtStartDate').value = today;
+  document.getElementById('txtEndDate').value = today;
+  document.getElementById('txtStartTime').placeholder = hour;
+  document.getElementById('txtEndTime').placeholder = hour;
+}
