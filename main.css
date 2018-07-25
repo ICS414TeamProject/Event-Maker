@@ -33,3 +33,7 @@ h1{
 hr{
   border-color: #cdcdcd;
 }
+
+.cTime{
+  width: 60px;
+}
