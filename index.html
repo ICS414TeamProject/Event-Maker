@@ -15,11 +15,14 @@
         <label for="txtLocation">Location</label>
         <input id="txtLocation" placeholder="Location of the Event..." type="text">
         <label for="txtStartDate">Start Date-Time</label>
-        <input id="txtStartDate" type="text" data-date-format="ddMMyyyy" placeholder="Start date mm.dd.yyyy">
-        <input id="txtStartTime" type="text" placeholder="00:00">
-        <label for="txtEndDate">End Date-Time</label>
-        <input id="txtEndDate" type="text" placeholder="End date mm.dd.yyyy">
-        <input id="txtEndTime" type="text" placeholder="00:00">
+        <input class="cTime" id="txtStartTimeHours" type="text">
+        <input class="cTime" id="txtStartTimeMinutes" type="text" placeholder="01">
+        </br>
+        <label for="txtEndDate">End Date</label>&nbsp;
+        <input id="txtEndDate" type="date">
+        <label for="txtEndDate">End Time</label>&nbsp;
+        <input class="cTime" id="txtEndTimeHours" type="text" placeholder="01">
+        <input class="cTime" id="txtEndTimeMinutes" type="text" placeholder="01">
         </br>
         <button id="btnDownload" onclick="createCalendar()">Download</button>
       </div>
