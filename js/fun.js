@@ -21,6 +21,7 @@ var createCalendar = function (){
       endMinutes = '0'+endMinutes
   }
   var EndTime = endHours + endMinutes + '00';
+
   var SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
   var calendarStart = [
       'BEGIN:VCALENDAR',
@@ -40,8 +41,24 @@ var createCalendar = function (){
       'END:VEVENT'
   ].join(SEPARATOR);
   var calendar = calendarStart + SEPARATOR + calendarEvent + SEPARATOR + calendarEnd;
-  console.write(calendar);
+  return calendar;
 }
+
+var download = function (){
+  var calendar = createCalendar();
+  createLink('NewEvent.ics', calendar);
+}
+
+var createLink = function(filename, text){
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/calendar;charset=utf8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+
 var getNow = function(){
   var now = new Date();
   var dd = now.getDate();
@@ -58,6 +75,8 @@ var getNow = function(){
   today = mm + '/' + dd + '/' + yyyy;
   document.getElementById('txtStartDate').value = today;
   document.getElementById('txtEndDate').value = today;
-  document.getElementById('txtStartTimeHours').placeholder = hour + ": " + minute;
-  document.getElementById('txtEndTimeHours').placeholder = hour + ": " + minute;
+  document.getElementById('txtStartTimeHours').placeholder = hour;
+  document.getElementById('txtStartTimeMinutes').placeholder = minute;
+  document.getElementById('txtEndTimeHours').placeholder = hour;
+  document.getElementById('txtEndTimeMinutes').placeholder = minute + 1;
 }
