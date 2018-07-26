@@ -1,38 +1,48 @@
 <html>
   <head>
+    <title>Calendar Event Generator by Team Lychee, 2018</title>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script>
     <script src="js/fun.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="main.css">
   </head>
-  <body>
+  <body onload="getNow()">
     <div id="container">
       <div id="header">
         <h1>Calendar Event Creator</h1>
       </div>
       <div id="content">
-      <label for="txtDescription">Description</label>
-      <input id="txtDescription" placeholder="Description of the Event..." type="text">
-      <label for="txtSummary">Summary</label>
-      <input id="txtSummary" placeholder="Summary of the Event..." type="text">
-      <label for="txtLocation">Location</label>
-      <input id="txtLocation" placeholder="Location of the Event..." type="text">
-      <label for="txtStartDate">Start Date</label>
-      <input id="txtStartDate" type="date" data-date-format="ddMMyyyy">
-      <label for="txtStartDate">Start Time</label>
-      <input class="cTime" id="txtStartTimeHours" type="text">
-      <input class="cTime" id="txtStartTimeMinutes" type="text" placeholder="01">
-      </br>
-      <label for="txtEndDate">End Date</label>&nbsp;
-      <input id="txtEndDate" type="date">
-      <label for="txtEndDate">End Time</label>&nbsp;
-      <input class="cTime" id="txtEndTimeHours" type="text" placeholder="01">
-      <input class="cTime" id="txtEndTimeMinutes" type="text" placeholder="01">
-      </br>
-      </br>
-      </br>
-      <button id="btnDownload" onclick="createCalendar()">Download Event as .ics file</button>
+        <label for="txtDescription">Description</label>
+        <input id="txtDescription" placeholder="Description of the Event..." type="text">
+        <label for="txtSummary">Summary</label>
+        <input id="txtSummary" placeholder="Summary of the Event..." type="text">
+        <label for="txtLocation">Location</label>
+        <input id="txtLocation" placeholder="Location of the Event..." type="text">
+        <script>
+          var input = document.getElementById('txtLocation');
+          var autocomplete = new google.maps.places.Autocomplete(input);
+          google.maps.event.addListener(autocomplete, 'place_changed', function(){
+             var place = autocomplete.getPlace();
+          })
+        </script>
+        <label for="txtStartDate">Start Date</label>
+        <input id="txtStartDate" type="date" data-date-format="ddMMyyyy">
+        <label for="txtStartDate">Start Time</label>
+        <input class="cTime" id="txtStartTimeHours" type="text">
+        <input class="cTime" id="txtStartTimeMinutes" type="text" placeholder="01">
+        </br>
+        <label for="txtEndDate">End Date</label>&nbsp;
+        <input id="txtEndDate" type="date">
+        <label for="txtEndDate">End Time</label>&nbsp;
+        <input class="cTime" id="txtEndTimeHours" type="text" placeholder="01">
+        <input class="cTime" id="txtEndTimeMinutes" type="text" placeholder="01">
+        </br>
+        </br>
+        </br>
+        <button id="btnDownload" onclick="download('calendar', '.ics')">Download Event as .ics file</button>
       </div>
       <div id="footer">
         <hr>
-        <label>Team Lychee 2018</label>
+        <img src="teamlychee.png" style="width:100px"/>
       </div>
     </div>
   </body>
