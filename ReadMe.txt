@@ -4,10 +4,11 @@ This project is designed to allow users to fill a form of an event, and download
 
 Version 1.0 notes:
   - Event download script works with title, description, start date, start time, end date, end time, location variables.
+
   - To Do:
     (Done in V-1.1)- Styling the HTML. Adding a .css file to the source
     (Done in V-1.2)- Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
-    - Find location functionality?
+    (Done in V-1.3)- Find location functionality?
 
 Version 1.1 notes:
   - Labels changed to HTML objects
@@ -29,3 +30,15 @@ Version 1.1.2
 Version 1.2
   - New time inputs added
   - JS file changed with the new time inputs
+
+Version 1.3
+  - Geolocations added
+  - Location input now uses Google Places API to autocomplete the location
+  - Team Lychee logo added
+
+  - To Do:
+    - Validations for inputs***** important!!!
+    - Code readability improvements***** important!!!
+    - Mailto functionality
+    - Help items
+    - Make geolocations optional with a checkbox
