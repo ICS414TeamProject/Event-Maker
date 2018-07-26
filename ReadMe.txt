@@ -6,7 +6,7 @@ Version 1.0 notes:
   - Event download script works with title, description, start date, start time, end date, end time, location variables.
   - To Do:
     (Done in V-1.1)- Styling the HTML. Adding a .css file to the source
-    (Done in V-1.1.1)- Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
+    (Done in V-1.2)- Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
     - Find location functionality?
 
 Version 1.1 notes:
@@ -28,3 +28,4 @@ Version 1.1.2
 
 Version 1.2
   - New time inputs added
+  - JS file changed with the new time inputs
