@@ -11,6 +11,26 @@
         <h1>Calendar Event Creator</h1>
       </div>
       <div id="content">
+        <div id="divSelects" style="display:inline">
+          <div id="divClass">
+            <label for="slcClass">Classification:</label>&nbsp;
+            <select id="slcClass">
+              <option value="PUBLIC">Public</option>
+              <option value="PRIVATE">Private</option>
+              <option value="CONFIDENTAL">Confidental</option>
+            </select>
+          </div>
+          &nbsp;&nbsp;
+          <div id="divPriority">
+            <label for="slcPriority">Priority:</label>&nbsp;
+            <select id="slcPriority">
+              <option value="0">No Priority</option>
+              <option value="1">Highest</option>
+              <option value="2">Next to the Highest</option>
+            </select>
+          </div>
+        </div>
+        </br>
         <label for="txtDescription">Description</label>
         <input id="txtDescription" onfocus="focused(this)" onblur="blurred(this)" placeholder="Description of the Event..." type="text">
         <label for="txtSummary">Summary</label>
