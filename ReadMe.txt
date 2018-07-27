@@ -45,5 +45,5 @@ Version 1.4
     (Done in V-1.4)- Code readability improvements***** important!!!
     (Done in V-1.4)- Make geolocations optional with a checkbox
     (Done in V-1.4)- Add File name input
-   - Mailto functionality *****(No possible way to achieve it with HTML and JS only)
-  - Help items
+    - Mailto functionality *****(No possible way to achieve it with HTML and JS only)
+    - Help items
