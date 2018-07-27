@@ -58,6 +58,23 @@ hr{
   text-align: right;
   color: #cdcdcd;
 }
+
+/*Styling for divSelect object*/
+#divSelects{
+  display: inline;
+}
+
+/*Styling for inline two div objects*/
+#divClass, #divPriority{
+  display:inline;
+  width: %50;
+}
+
+/*Styling for select objects*/
+#slcClass, #slcPriority{
+  width: 150px;
+}
+
 /*Styling for End Date and Start Date inputs*/
 #txtEndDate, #txtStartDate {
   width: 35%;
