@@ -239,3 +239,8 @@ var bindGeo = function(){
   google.maps.event.addListener(autocomplete, 'place_changed', function(){
      var place = autocomplete.getPlace();})
 }
+function getTZID(){
+  var tz = jstz.determine(); // Determines the time zone of the browser client
+  var timezone = tz.name();
+  return timezone;
+}
