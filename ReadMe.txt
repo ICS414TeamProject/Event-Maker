@@ -36,9 +36,20 @@ Version 1.3
   - Location input now uses Google Places API to autocomplete the location
   - Team Lychee logo added
 
+ Version 1.4
+  - Validations added
+  - Design changes
+  - Geolocations checkbox added
+  - Code readability improvements
+  - File Name (Optional) textbox added
+
   - To Do:
-    - Validations for inputs***** important!!!
-    - Code readability improvements***** important!!!
-    - Mailto functionality
+    (Done in V-1.1)- Styling the HTML. Adding a .css file to the source
+    (Done in V-1.2)- Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
+    (Done in V-1.3)- Find location functionality?
+    (Done in V-1.4)- Validations for inputs***** important!!!
+    (Done in V-1.4)- Code readability improvements***** important!!!
+    (Done in V-1.4)- Make geolocations optional with a checkbox
+    (Done in V-1.4)- Add File name input
+   - Mailto functionality *****(No possible way to achieve it with HTML and JS only)
     - Help items
-    - Make geolocations optional with a checkbox
