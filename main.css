@@ -7,7 +7,6 @@ body{
   background-size:52px 52px;
   background-position: 0 0, 26px 26px;
 }
-
 /*General styling for input elements*/
 input{
   width: 100%;
@@ -36,7 +35,6 @@ hr{
   margin: 1em 0;
   padding: 0;
 }
-
 /*Main div (container) styling*/
 #container{
   width: 500px;
@@ -69,10 +67,9 @@ hr{
   border-radius: 4px;
   box-sizing: border-box;
 }
-
 /*Download button general styling*/
 #btnDownload{
- width: 100%;
+  width: 100%;
   background-color: #EC3C3C;
   color: white;
   padding: 14px 20px;
@@ -81,12 +78,10 @@ hr{
   border-radius: 4px;
   cursor: pointer;
 }
-
 /*Download button onover styling*/
 #btnDownload:hover{
   background-color: #c31f1f;
 }
-
 /*Label for Checkbox styling*/
 #chcGeo{
   display: inline;
@@ -95,12 +90,12 @@ hr{
   font-size: 8pt;
   color: #ff8888;
 }
-#lblFileName{
+ #lblFileName{
    display: inline;
    text-indent: -15px;
    font-size: 8pt;
    color: #ff8888;
-}
+ }
 /*Checkbox for Google Places Autocomplete styling*/
 #chcGeolocation{
   width: 13px;
@@ -112,7 +107,6 @@ hr{
   top: -1px;
   *overflow: hidden;
 }
-
 #txtFileName{
   width: 200px;
   height: 25px;
@@ -121,7 +115,6 @@ hr{
   border-radius: 4px;
   box-sizing: border-box;
 }
-
 /*Start and End Time, hours and minutes input styling*/
 .cTime{
   width: 60px;
