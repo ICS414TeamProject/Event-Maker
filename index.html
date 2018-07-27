@@ -12,33 +12,31 @@
       </div>
       <div id="content">
         <label for="txtDescription">Description</label>
-        <input id="txtDescription" placeholder="Description of the Event..." type="text">
+        <input id="txtDescription" onfocus="focused(this)" onblur="blurred(this)" placeholder="Description of the Event..." type="text">
         <label for="txtSummary">Summary</label>
-        <input id="txtSummary" placeholder="Summary of the Event..." type="text">
+        <input id="txtSummary" onfocus="focused(this)" onblur="blurred(this)" placeholder="Summary of the Event..." type="text">
         <label for="txtLocation">Location</label>
-        <input id="txtLocation" placeholder="Location of the Event..." type="text">
-        <script>
-          var input = document.getElementById('txtLocation');
-          var autocomplete = new google.maps.places.Autocomplete(input);
-          google.maps.event.addListener(autocomplete, 'place_changed', function(){
-             var place = autocomplete.getPlace();
-          })
-        </script>
+        <label for="chcGeolocation" id="chcGeo">
+          <input type="checkbox" style="margin-top:12px;" id="chcGeolocation" onclick="checkGeo()">
+          Use Google Maps to find Location</label>
+        <input id="txtLocation" onfocus="focused(this)" onblur="blurred(this)" placeholder="Location of the Event..." type="text">
         <label for="txtStartDate">Start Date</label>
-        <input id="txtStartDate" type="date" data-date-format="ddMMyyyy">
+        <input id="txtStartDate" onfocus="focused(this)" onblur="blurred(this)" type="date">
         <label for="txtStartDate">Start Time</label>
-        <input class="cTime" id="txtStartTimeHours" type="text">
-        <input class="cTime" id="txtStartTimeMinutes" type="text" placeholder="01">
+        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtStartTimeHours" type="text">&nbsp;:
+        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtStartTimeMinutes" type="text" placeholder="01">
         </br>
         <label for="txtEndDate">End Date</label>&nbsp;
-        <input id="txtEndDate" type="date">
+        <input id="txtEndDate" onfocus="focused(this)" onblur="blurred(this)" type="date">
         <label for="txtEndDate">End Time</label>&nbsp;
-        <input class="cTime" id="txtEndTimeHours" type="text" placeholder="01">
-        <input class="cTime" id="txtEndTimeMinutes" type="text" placeholder="01">
+        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtEndTimeHours" type="text" placeholder="01">&nbsp;:
+        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtEndTimeMinutes" type="text" placeholder="01">
         </br>
         </br>
         </br>
-        <button id="btnDownload" onclick="download('calendar', '.ics')">Download Event as .ics file</button>
+        <label for="txtFileName" id="lblFileName">File Name (Optional):</label>
+        <input id="txtFileName" type="text">&nbsp;.ics
+        <button id="btnDownload" onclick="download(document.getElementById('txtFileName').value, '.ics')">Download Event as .ics file</button>
       </div>
       <div id="footer">
         <hr>
