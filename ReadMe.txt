@@ -32,18 +32,38 @@ Version 1.3
   - Team Lychee logo added
 
 Version 1.4
+
   - Validations added
+
   - Design changes
-  - Geolocations checkbox added
+
+  - Places API checkbox added
+
   - Code readability improvements
+
   - File Name (Optional) textbox added
+
+  - Code improvements and Error fixes
+  
+Version 1.5
+  - Classification added with a select element
+  - Geolocation added
+  - Priority added
+  - DTSTAMP added
+  - UID added
+  - TZID added
+  * This Version's output file has no errors or warnings on icalendar validation.
+  
   - To Do:
     (Done in V-1.1)- Styling the HTML. Adding a .css file to the source
     (Done in V-1.2)- Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
     (Done in V-1.3)- Find location functionality?
     (Done in V-1.4)- Validations for inputs***** important!!!
     (Done in V-1.4)- Code readability improvements***** important!!!
-    (Done in V-1.4)- Make geolocations optional with a checkbox
+    (Done in V-1.4)- Make Places API optional with a checkbox
     (Done in V-1.4)- Add File name input
+    (Done in V-1.5)- Classification ****important
+    (Done in V-1.5)- Priority ****important
     - Mailto functionality *****(No possible way to achieve it with HTML and JS only)
     - Help items
+    - RRULE ******important
