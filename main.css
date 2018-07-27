@@ -1,25 +1,66 @@
+/*body styling*/
+body{
+  background-color:#fffafa;
+  /*With code below, we achieved polkadot background design without using images*/
+  background-image: radial-gradient(#fff4f4 15%, transparent 1%),
+  radial-gradient(#fff4f4 15%, transparent 1%);
+  background-size:52px 52px;
+  background-position: 0 0, 26px 26px;
+}
+
+/*General styling for input elements*/
+input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/*h1 elements styling*/
+h1{
+  font-size: 24pt;
+  color: #111111;
+  vertical-align: center;
+  font-style: italic;
+  font-family: serif;
+  padding: 20px;
+}
+/*hr elements styling*/
+hr{
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ff8888;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*Main div (container) styling*/
 #container{
   width: 500px;
   height: %100;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1px solid #f88;
   background-color: #f2f2f2;
   padding: 20px;
   margin: auto;
   font-family: sans-serif;
 }
-
+/*Header styling*/
 #header{
   width: %100;
   text-align: center;
 }
-
+/*Footer styling*/
 #footer{
   width: %100;
-  padding-top: 50px;
+  padding-top: 10px;
   text-align: right;
   color: #cdcdcd;
 }
-
+/*Styling for End Date and Start Date inputs*/
 #txtEndDate, #txtStartDate {
   width: 35%;
   padding: 12px 20px;
@@ -29,9 +70,10 @@
   box-sizing: border-box;
 }
 
+/*Download button general styling*/
 #btnDownload{
-  width: 100%;
-  background-color: #4CAF50;
+ width: 100%;
+  background-color: #EC3C3C;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -39,37 +81,48 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+/*Download button onover styling*/
 #btnDownload:hover{
-  background-color: #45a049;
+  background-color: #c31f1f;
 }
 
-h1{
-  font-size: 24pt;
-  color: #111111;
-  vertical-align: center;
-  font-style: italic;
-  font-family: serif;
-  padding: 20px;
+/*Label for Checkbox styling*/
+#chcGeo{
+  display: inline;
+  padding-left: 15px;
+  text-indent: -15px;
+  font-size: 8pt;
+  color: #ff8888;
+}
+#lblFileName{
+   display: inline;
+   text-indent: -15px;
+   font-size: 8pt;
+   color: #ff8888;
+}
+/*Checkbox for Google Places Autocomplete styling*/
+#chcGeolocation{
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
 }
 
-hr{
-  border-color: #cdcdcd;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+#txtFileName{
+  width: 200px;
+  height: 25px;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-input:focus {
-    border: 1px solid #4CAF50;
-}
-
+/*Start and End Time, hours and minutes input styling*/
 .cTime{
   width: 60px;
 }
