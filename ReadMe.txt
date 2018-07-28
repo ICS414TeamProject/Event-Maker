@@ -3,10 +3,12 @@ ICS414 Calendar Event Creator by Team Lychee, 2018.
 Project by; Selim Karaoglu, Seth Kinel and Thinh Lam.
 
 This web application is designed to generate event files with event information provided by the user.
-This application is capable of create calendar event files with ".ics" extension that can be emailed or shared and read into the recipient's calendar applications.
-Application provides a user to fill or select variables including; Classification, Priority, Description, Summary, Location, Start Date, Start Time, End Date, End Time and File Name.
-In the process, there are also features without user control including; Geolocation, Timezone, UID and Date Time Stamp.
-At the end of the process, user downloads the event file.
+This application is capable of create calendar event files with ".ics" extension that can be emailed or shared
+and read into the recipient's calendar applications. Application provides a user to fill or select variables
+including; Classification, Priority, Description, Summary, Location, Start Date, Start Time, End Date, End
+Time and File Name. In the process, there are also features without user control including; Geolocation,
+Timezone, UID and Date Time Stamp. At the end of the process, user downloads the event file.
+
 With the Version 1.5, we achieved to get no error or warning from icalendar.org's validator.
 
 Version 1.0 notes:
