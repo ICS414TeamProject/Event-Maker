@@ -8,7 +8,7 @@ body{
   background-position: 0 0, 26px 26px;
 }
 /*General styling for input elements*/
-input{
+input, select{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -58,23 +58,19 @@ hr{
   text-align: right;
   color: #cdcdcd;
 }
-
 /*Styling for divSelect object*/
 #divSelects{
   display: inline;
 }
-
 /*Styling for inline two div objects*/
 #divClass, #divPriority{
   display:inline;
   width: %50;
 }
-
 /*Styling for select objects*/
 #slcClass, #slcPriority{
   width: 150px;
 }
-
 /*Styling for End Date and Start Date inputs*/
 #txtEndDate, #txtStartDate {
   width: 35%;
@@ -108,7 +104,7 @@ hr{
   color: #ff8888;
 }
 /*Label for File Name styling*/
- #lblFileName{
+ #lblFileName, #lblGeo, #lblGeolocation{
    display: inline;
    text-indent: -15px;
    font-size: 8pt;
