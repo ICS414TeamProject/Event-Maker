@@ -21,20 +21,20 @@ function createCalendar(){
   var startHours = String(document.getElementById('txtStartTimeHours').value);
   if(startHours<10) {
       startHours = String('0'+ parseInt(startHours));
-  }
+  }else if (startHours == 0){startHours = "00"}
   var startMinutes = String(document.getElementById('txtStartTimeMinutes').value);
   if(startMinutes<10) {
       startMinutes = String('0'+ parseInt(startMinutes));
-  }
+  }else if (startMinutes == 0){startMinutes = "00"}
   var StartTime = startHours + startMinutes + '00';
   var endHours = String(document.getElementById('txtEndTimeHours').value);
   if(endHours<10) {
       endHours = String('0'+ parseInt(endHours));
-  }
+  }else if (endHours == 0){endHours = "00"}
   var endMinutes = String(document.getElementById('txtEndTimeMinutes').value);
   if(endMinutes<10) {
       endMinutes = String('0'+ parseInt(endMinutes));
-  }
+  }else if (endMinutes == 0){endMinutes = "00"}
   var EndTime = endHours + endMinutes + '00';
 
   //Creating the content of the event file.
@@ -276,6 +276,7 @@ function blurred(elem){
   {
     if(elem.value < 10 && elem.value != "" && elem.value > 0)
     {elem.value = String('0'+ parseInt(elem.value));}
+    else if (elem.value == 0){elem.value = "00"}
   }
   if (errorflag == true)
   {
