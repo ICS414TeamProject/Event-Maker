@@ -1,6 +1,19 @@
 //The main function that creates the calendar file.
-var createCalendar = function (){
+function createCalendar(){
+  var tzid = getTZID();
   //Date and Time adjustments
+  var n = getNow();
+  var stamp = n[0];
+  var yyyy = n[1];
+  var mm = n[2];
+  var dd = n[3];
+  var hour = n[4];
+  var minute = n[5];
+  var second = n[6];
+  var comp = stamp.toISOString();
+  var p = comp.split('-');
+  comp = p[0] + p[1] + p[2];
+  //This part splits the date value from inputs into day, month and year.
   var par = String(document.getElementById('txtStartDate').value).split('-');
   var StartDate = par[0] + par[1] + par[2];
   var par = String(document.getElementById('txtEndDate').value).split('-');
@@ -24,18 +37,26 @@ var createCalendar = function (){
   }
   var EndTime = endHours + endMinutes + '00';
 
-  //Creating the index of the event file.
+  //Creating the content of the event file.
   var SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
   var calendarStart = [
       'BEGIN:VCALENDAR',
       'PRODID:Calendar',
+      //The Version (section	3.7.4	of RFC	5545) is defined here
       'VERSION:2.0'
   ].join(SEPARATOR);
   var calendarEnd = SEPARATOR + 'END:VCALENDAR';
   var calendarEvent = [
       'BEGIN:VEVENT',
-      'CLASS:PUBLIC',
+      'TZID:' + tzid,
+      //Adding Classification from select element's selected value
+      'CLASS:' + document.getElementById('slcClass').options[document.getElementById('slcClass').selectedIndex].value,
+      'PRIORITY:' + document.getElementById('slcPriority').options[document.getElementById('slcPriority').selectedIndex].value,
+      'UID:' + comp + "@domainname.here",
+      'GEO:' + document.getElementById('lblGeolocation').innerHTML,
+      //Adding the input values to corresponding positions
       'DESCRIPTION:' + document.getElementById('txtDescription').value,
+      'DTSTAMP:' + yyyy + mm + dd + "T" + hour + minute + second,
       'DTSTART;VALUE=DATE:' + StartDate + "T" + StartTime,
       'DTEND;VALUE=DATE:' + EndDate + "T" + EndTime,
       'LOCATION:' + document.getElementById('txtLocation').value,
@@ -43,12 +64,12 @@ var createCalendar = function (){
       'TRANSP:TRANSPARENT',
       'END:VEVENT'
   ].join(SEPARATOR);
-  var calendar = calendarStart + SEPARATOR + calendarEvent + SEPARATOR + calendarEnd;
+  var calendar = calendarStart + SEPARATOR + calendarEvent + calendarEnd;
   return calendar;
 }
 
 //bringElements function collects inputs in the page to an array for validation.
-var bringElements = function(){
+function bringElements(){
   var txtD = document.getElementById('txtDescription');
   var txtS = document.getElementById('txtSummary');
   var txtL = document.getElementById('txtLocation');
@@ -63,8 +84,10 @@ var bringElements = function(){
 }
 
 //download function calls only from download button
-var download = function (fname, ext){
+function download(fname, ext){
+  //All the validation is based on errorflag variable
   var errorflag = false;
+  //errorflags array is used for validation off all inputs in the page
   var errorflags = [];
   var elements = bringElements();
   //Validate to see if there are any errors in inputs
@@ -73,6 +96,7 @@ var download = function (fname, ext){
     if (errorflag == false)
     {errorflags.push(errorflag);}
   }
+  //If there are no errors, download the file whether it has a filename or not
   if (errorflags.length == 0)
   {
     if(fname != "")
@@ -85,13 +109,14 @@ var download = function (fname, ext){
       createLink('NewEvent.ics', calendar);
     }
   }
+  //Validation alert
   else {
     alert("Please check the information");
   }
 }
 
 //createLink function creates the downloadable .ics file with element "a" of HTML.
-var createLink = function(filename, text){
+function createLink(filename, text){
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/calendar;charset=utf8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
@@ -101,49 +126,81 @@ var createLink = function(filename, text){
   document.body.removeChild(element);
 }
 
+//Function for body element's onload event
+function bodyOnload(){
+  //getNow fills the responsible inputs with current time.
+  getNow();
+  document.getElementById('chcGeolocation').checked = true;
+  //Binds the autocomplete function to the input
+  bindGeo();
+  //Fills the File Name textbox' value with dummy text
+  document.getElementById('txtFileName').value = "NewEvent";
+  document.getElementById('slcClass').options[document.getElementById('slcClass').selectedIndex].value = 'PUBLIC'
+  if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }else {
+        document.getElementById('lblGeolocation').innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    document.getElementById('lblGeolocation').innerHTML = position.coords.latitude + ";"+ position.coords.longitude;
+}
+
 //getNow function fills the time input placeholders with current time.
-var getNow = function(){
+function getNow(){
   var now = new Date();
   var dd = now.getDate();
   var mm = now.getMonth() + 1; //January is 0!
   var yyyy = now.getFullYear();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
   if(dd<10) {
       dd = '0'+ dd
   }
   if(mm<10) {
       mm = '0'+ mm
   }
-  var hour = now.getHours();
-  var minute = now.getMinutes();
-  today = mm + '/' + dd + '/' + yyyy;
-  document.getElementById('txtStartDate').value = today;
-  document.getElementById('txtEndDate').value = today;
   if(hour<10) {
-      hour = '0'+ hour
+    if(hour == 0){hour = "00"}
+    else{
+      hour = '0'+ hour}
   }
+  if(minute<10) {
+    if(minute == 0){minute = "00"}
+    else{
+      minute = '0'+ minute}
+  }
+  if(second<10) {
+    if(second == 0){second = "00"}
+    else{
+      second = '0'+ second}
+  }
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById('txtStartDate').placeholder = today;
+  document.getElementById('txtEndDate').placeholder = today;
   document.getElementById('txtStartTimeHours').placeholder = hour;
   document.getElementById('txtEndTimeHours').placeholder = hour;
   if(minute<9) {
-      minute = '0'+ minute
-      document.getElementById('txtEndTimeMinutes').placeholder = "0" + String(parseInt(minute) + 1);
-  } else {document.getElementById('txtEndTimeMinutes').placeholder = String(parseInt(minute) + 1);}
+    document.getElementById('txtEndTimeMinutes').placeholder = "0" + String(parseInt(minute) + 1);
+  } else if (parseInt(minute) == 59){
+    document.getElementById('txtEndTimeHours').placeholder = String(parseInt(hour) + 1);
+    document.getElementById('txtEndTimeMinutes').placeholder ="00"
+  }
+  else {document.getElementById('txtEndTimeMinutes').placeholder = String(parseInt(minute) + 1);}
   document.getElementById('txtStartTimeMinutes').placeholder = minute;
-
-  document.getElementById('chcGeolocation').checked = true;
-  bindGeo();
-
-  document.getElementById('txtFileName').value = "NewEvent";
+  return [now, yyyy, mm, dd, hour, minute, second];
 }
 
 //validation function validates the inputs in the form with designed rules.
-var validation = function(elem){
+function validation(elem){
   var errorflag = true;
   //Check if Description, Summary, Location or Start Date is empty.
   if (elem.id == "txtDescription" || elem.id == "txtSummary" || elem.id == "txtLocation" || elem.id == "txtStartDate")
   {
     if (elem.value == "")
     {
-      elem.style.borderColor="#EC3C3C";
       errorflag = false;
     }
   }
@@ -152,7 +209,6 @@ var validation = function(elem){
   {
     if (elem.value == "" || elem.value < 0 || elem.value > 23)
     {
-      elem.style.borderColor="#EC3C3C";
       errorflag = false;
     }
   }
@@ -162,7 +218,6 @@ var validation = function(elem){
     var val = parseInt(elem.value);
     if (elem.value == "" || val < 0 || val > 59)
     {
-      elem.style.borderColor="#EC3C3C";
       errorflag = false;
     }
   }
@@ -181,43 +236,62 @@ var validation = function(elem){
       var eday = parseInt(par[2]);
       if (eyear > syear)
       {errorflag = true;}
-      else if (emonth > smonth)
-      {errorflag = true;}
-      else if (eday >= sday)
-      {errorflag = true;}
-      else {errorflag = false;}
+      else if (eyear == syear)
+      {
+        if (emonth > smonth)
+        {errorflag = true;}
+        else if (emonth == smonth)
+        {
+          if (eday >= sday)
+          {errorflag = true;}
+          else {errorflag = false;}
+        }
+        else{errorflag = false;}
+      }
+      else{errorflag = false;}
     }
     else {
-      elem.style.borderColor="#EC3C3C";
       errorflag = false;
     }
   }
+  if(errorflag == true)
+  {elem.style.borderColor="#CCCCCC";}
+  else {elem.style.borderColor="#EC3C3C";}
   return errorflag;
 }
 
 //inputs' onfocus event
-var focused = function(elem){
+function focused(elem){
   elem.style.borderColor="#4CAF50";
 }
 
 //inputs' onblur event
-var blurred = function(elem){
+function blurred(elem){
   var errorflag = validation(elem);
+  if (elem.id == "txtStartDate")
+  {
+    errorflag = validation(document.getElementById('txtEndDate'));
+  }
   if (elem.id == "txtStartTimeHours" || elem.id == "txtStartTimeMinutes" || elem.id == "txtEndTimeHours" || elem.id == "txtEndTimeMinutes")
   {
-    if(elem.value < 10)
+    if(elem.value < 10 && elem.value != "" && elem.value > 0)
     {elem.value = "0" + elem.value;}
   }
   if (errorflag == true)
   {
     elem.style.borderColor="#CCCCCC";
   }else {
-    elem.style.borderColor="#EC3C3C";
+    if (elem.id == "txtStartDate")
+    {
+      document.getElementById('txtEndDate').style.borderColor="#EC3C3C";
+    }
+    else{
+    elem.style.borderColor="#EC3C3C";}
   }
 }
 
 //Checkbox validation to make Google Maps autocomplete on or off
-var checkGeo = function(){
+function checkGeo(){
   var chc = document.getElementById("chcGeolocation");
   if(chc.checked == true)
   {
@@ -233,12 +307,13 @@ var checkGeo = function(){
 }
 
 //bindGeo binds the Google Maps Places API to autocomplete the Location input
-var bindGeo = function(){
+function bindGeo(){
   var asd = document.getElementById('txtLocation');
   var autocomplete = new google.maps.places.Autocomplete(asd);
   google.maps.event.addListener(autocomplete, 'place_changed', function(){
      var place = autocomplete.getPlace();})
 }
+
 function getTZID(){
   var tz = jstz.determine(); // Determines the time zone of the browser client
   var timezone = tz.name();
