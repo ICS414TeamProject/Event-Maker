@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+PRODID:Calendar
+VERSION:2.0
+BEGIN:VEVENT
+TZID:Pacific/Honolulu
+CLASS:PUBLIC
+PRIORITY:0
+UID:20180728T00:51:31.517Z@domainname.here
+GEO:21.295629299999998;-157.8245643
+DESCRIPTION:Mars Landing Party
+DTSTAMP:20180727T145131
+DTSTART;VALUE=DATE:20320529T1200000
+DTEND;VALUE=DATE:20320529T1700000
+LOCATION:Huygens Crater Base
+SUMMARY;LANGUAGE=en-us:Starlight Express flight MV-00013-32-C Mars landing party. For the passengers of our Mars flight, there is a landing party waiting in Huygens Crater Base with the most amazing views of Mars.
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
