@@ -1,11 +1,12 @@
 <html>
   <head>
     <title>Calendar Event Generator by Team Lychee, 2018</title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script>
     <script src="js/fun.js" type="text/javascript"></script>
     <link rel="stylesheet" href="main.css">
   </head>
-  <body onload="getNow()">
+  <body onload="bodyOnload()">
     <div id="container">
       <div id="header">
         <h1>Calendar Event Creator</h1>
@@ -30,6 +31,12 @@
             </select>
           </div>
         </div>
+        </br>
+        <div id="divGeo" style="display:inline">
+          <label id="lblGeo">Your Geolocation:</label>&nbsp;
+          <label id="lblGeolocation"></label>
+        </div>
+        </br>
         </br>
         <label for="txtDescription">Description</label>
         <input id="txtDescription" onfocus="focused(this)" onblur="blurred(this)" placeholder="Description of the Event..." type="text">
