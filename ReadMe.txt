@@ -57,7 +57,10 @@ Version 1.0 (Alpha Version)
   - TZID added
   * This Version's output file has no errors or warnings on icalendar validation.
 
-  - To Do:
+Bug Fixes:
+  - Validation, infinite zero addition in onblur function fixed
+
+To Do:
 	(Done in V-0.2)- Styling the HTML. Adding a .css file to the source
 	(Done in V-0.3)- Change the input style of Start-End Date and Time. (textboxes? pop-up calendar?)
 	(Done in V-0.4)- Find location functionality?
