@@ -20,20 +20,20 @@ function createCalendar(){
   var EndDate = par[0] + par[1] + par[2];
   var startHours = String(document.getElementById('txtStartTimeHours').value);
   if(startHours<10) {
-      startHours = '0'+ startHours
+      startHours = String('0'+ parseInt(startHours));
   }
   var startMinutes = String(document.getElementById('txtStartTimeMinutes').value);
   if(startMinutes<10) {
-      startMinutes = '0'+ startMinutes
+      startMinutes = String('0'+ parseInt(startMinutes));
   }
   var StartTime = startHours + startMinutes + '00';
   var endHours = String(document.getElementById('txtEndTimeHours').value);
   if(endHours<10) {
-      endHours = '0'+ endHours
+      endHours = String('0'+ parseInt(endHours));
   }
   var endMinutes = String(document.getElementById('txtEndTimeMinutes').value);
   if(endMinutes<10) {
-      endMinutes = '0'+ endMinutes
+      endMinutes = String('0'+ parseInt(endMinutes));
   }
   var EndTime = endHours + endMinutes + '00';
 
@@ -157,25 +157,25 @@ function getNow(){
   var minute = now.getMinutes();
   var second = now.getSeconds();
   if(dd<10) {
-      dd = '0'+ dd
+      dd = String('0'+ parseInt(dd));
   }
   if(mm<10) {
-      mm = '0'+ mm
+      mm = String('0'+ parseInt(mm));
   }
   if(hour<10) {
     if(hour == 0){hour = "00"}
     else{
-      hour = '0'+ hour}
+      hour = String('0'+ parseInt(hour));}
   }
   if(minute<10) {
     if(minute == 0){minute = "00"}
     else{
-      minute = '0'+ minute}
+      minute = String('0'+ parseInt(minute));}
   }
   if(second<10) {
     if(second == 0){second = "00"}
     else{
-      second = '0'+ second}
+      second = String('0'+ parseInt(second));}
   }
   today = yyyy + '-' + mm + '-' + dd;
   document.getElementById('txtStartDate').placeholder = today;
@@ -275,7 +275,7 @@ function blurred(elem){
   if (elem.id == "txtStartTimeHours" || elem.id == "txtStartTimeMinutes" || elem.id == "txtEndTimeHours" || elem.id == "txtEndTimeMinutes")
   {
     if(elem.value < 10 && elem.value != "" && elem.value > 0)
-    {elem.value = "0" + elem.value;}
+    {elem.value = String('0'+ parseInt(elem.value));}
   }
   if (errorflag == true)
   {
