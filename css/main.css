@@ -63,13 +63,21 @@ hr{
   display: inline;
 }
 /*Styling for inline two div objects*/
-#divClass, #divPriority{
+#divClass, #divPriority, #divFreq, #divWkst, #divInterval, #divCount{
   display:inline;
-  width: %50;
+  width: 50%;
 }
-/*Styling for select objects*/
 #slcClass, #slcPriority{
   width: 150px;
+}
+#slcRepeat{
+  width: 40%;
+  display: inline;
+}
+/*Styling for Rrule div*/
+#divRrule{
+  width: 100%;
+  margin: 10px;
 }
 /*Styling for End Date and Start Date inputs*/
 #txtEndDate, #txtStartDate {
@@ -79,6 +87,18 @@ hr{
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+/*txtInterval, txtCount styling*/
+#txtCount{
+  width: 40%;
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#txtUntil{
+  width: 40%;
+  display: inline;
 }
 /*Download button general styling*/
 #btnDownload{
@@ -111,7 +131,7 @@ hr{
    color: #ff8888;
  }
 /*Checkbox for Google Places Autocomplete styling*/
-#chcGeolocation{
+#chcGeolocation, #chcRrule{
   width: 13px;
   height: 13px;
   padding: 0;
@@ -133,4 +153,13 @@ hr{
 /*Start and End Time, hours and minutes input styling*/
 .cTime{
   width: 60px;
+}
+/*light hr styling*/
+.hrlight{
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ffcccc;
+  margin: 1em 0;
+  padding: 0;
 }
