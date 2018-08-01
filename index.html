@@ -12,58 +12,85 @@
         <h1>Calendar Event Creator</h1>
       </div>
       <div id="content">
-        <div id="divSelects" style="display:inline">
-          <div id="divClass">
-            <label for="slcClass">Classification:</label>&nbsp;
-            <select id="slcClass">
-              <option value="PUBLIC">Public</option>
-              <option value="PRIVATE">Private</option>
-              <option value="CONFIDENTAL">Confidental</option>
-            </select>
+        <form id="mainForm">
+          <div id="divSelects" style="display:inline">
+            <div id="divClass">
+              <label for="slcClass">Classification:</label>&nbsp;
+              <select id="slcClass">
+                <option value="PUBLIC">Public</option>
+                <option value="PRIVATE">Private</option>
+                <option value="CONFIDENTAL">Confidental</option>
+              </select>
+            </div>
+            &nbsp;&nbsp;
+            <div id="divPriority">
+              <label for="slcPriority">Priority:</label>&nbsp;
+              <select id="slcPriority">
+                <option value="0">No Priority</option>
+                <option value="1">Highest</option>
+                <option value="2">Next to the Highest</option>
+              </select>
+            </div>
           </div>
-          &nbsp;&nbsp;
-          <div id="divPriority">
-            <label for="slcPriority">Priority:</label>&nbsp;
-            <select id="slcPriority">
-              <option value="0">No Priority</option>
-              <option value="1">Highest</option>
-              <option value="2">Next to the Highest</option>
-            </select>
+          </br>
+          <div id="divGeo" style="display:inline">
+            <label id="lblGeo">Your Geolocation:</label>&nbsp;
+            <label id="lblGeolocation"></label>
           </div>
-        </div>
-        </br>
-        <div id="divGeo" style="display:inline">
-          <label id="lblGeo">Your Geolocation:</label>&nbsp;
-          <label id="lblGeolocation"></label>
-        </div>
-        </br>
-        </br>
-        <label for="txtDescription">Description</label>
-        <input id="txtDescription" onfocus="focused(this)" onblur="blurred(this)" placeholder="Description of the Event..." type="text">
-        <label for="txtSummary">Summary</label>
-        <input id="txtSummary" onfocus="focused(this)" onblur="blurred(this)" placeholder="Summary of the Event..." type="text">
-        <label for="txtLocation">Location</label>
-        <label for="chcGeolocation" id="chcGeo">
-          <input type="checkbox" style="margin-top:12px;" id="chcGeolocation" onclick="checkGeo()">
-          Use Google Maps to find Location</label>
-        <input id="txtLocation" onfocus="focused(this)" onblur="blurred(this)" placeholder="Location of the Event..." type="text">
-        <label for="txtStartDate">Start Date</label>
-        <input id="txtStartDate" onfocus="focused(this)" onblur="blurred(this)" type="date">
-        <label for="txtStartDate">Start Time</label>
-        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtStartTimeHours" type="text">&nbsp;:
-        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtStartTimeMinutes" type="text" placeholder="01">
-        </br>
-        <label for="txtEndDate">End Date</label>&nbsp;
-        <input id="txtEndDate" onfocus="focused(this)" onblur="blurred(this)" type="date">
-        <label for="txtEndDate">End Time</label>&nbsp;
-        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtEndTimeHours" type="text" placeholder="01">&nbsp;:
-        <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtEndTimeMinutes" type="text" placeholder="01">
-        </br>
-        </br>
-        </br>
-        <label for="txtFileName" id="lblFileName">File Name (Optional):</label>
-        <input id="txtFileName" type="text">&nbsp;.ics
-        <button id="btnDownload" onclick="download(document.getElementById('txtFileName').value, '.ics')">Download Event as .ics file</button>
+          </br>
+          </br>
+          <label for="txtDescription">Description</label>
+          <input id="txtDescription" onfocus="focused(this)" onblur="blurred(this)" placeholder="Description of the Event..." type="text">
+          <label for="txtSummary">Summary</label>
+          <input id="txtSummary" onfocus="focused(this)" onblur="blurred(this)" placeholder="Summary of the Event..." type="text">
+          <label for="txtLocation">Location</label>
+          <label for="chcGeolocation" id="chcGeo">
+            <input type="checkbox" style="margin-top:12px;" id="chcGeolocation" onclick="checkGeo()">
+            Use Google Maps to find Location</label>
+          <input id="txtLocation" onfocus="focused(this)" onblur="blurred(this)" placeholder="Location of the Event..." type="text">
+          <label for="txtStartDate">Start Date</label>
+          <input id="txtStartDate" onfocus="focused(this)" onblur="blurred(this)" type="date">
+          <label for="txtStartDate">Start Time</label>
+          <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtStartTimeHours" type="text">&nbsp;:
+          <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtStartTimeMinutes" type="text" placeholder="01">
+          </br>
+          <label for="txtEndDate">End Date</label>&nbsp;
+          <input id="txtEndDate" onfocus="focused(this)" onblur="blurred(this)" type="date">
+          <label for="txtEndDate">End Time</label>&nbsp;
+          <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtEndTimeHours" type="text" placeholder="01">&nbsp;:
+          <input class="cTime" onfocus="focused(this)" onblur="blurred(this)" id="txtEndTimeMinutes" type="text" placeholder="01">
+          <hr class="hrlight">
+          <label for="chcRrule" id="lblRrule">
+            <input type="checkbox" id="chcRrule" onclick="rruleClick()">
+            This is a Recurring Event</label>
+          <div id="divRrule">
+            <select id="slcFreq" onchange="slcFreqChanged(this)">
+              <option value="" selected disabled>Event Frequency</option>
+              <option value="DAILY">Daily</option>
+              <option value="WEEKLY">Weekly</option>
+              <option value="MONTHLY">Monthly by Day</option>
+              <option value="MONTHLY">Monthly by Date</option>
+              <option value="YEARLY">Yearly by Day</option>
+              <option value="YEARLY">Yearly by Date</option>
+            </select>
+            <select id="slcByWhat"></select>
+            <select id="slcInterval"></select>
+            <select id="slcBy2"></select>
+            <select id="slcRepeat" onchange="sclRepeatChanged(this)">
+              <option value="" selected>Repeat Forever</option>
+              <option value="UNTIL">Until</option>
+              <option value="OC"># of Occurences</option>
+            </select>
+            <input id="txtUntil" onfocus="focused(this)" onblur="blurred(this)" type="date">
+            <input id="txtCount" onfocus="focused(this)" onblur="blurred(this)" type="number">
+          </div>
+          <hr class="hrlight">
+          </br>
+          </br>
+          <label for="txtFileName" id="lblFileName">File Name (Optional):</label>
+          <input id="txtFileName" type="text">&nbsp;.ics
+          <button id="btnDownload" onclick="download(document.getElementById('txtFileName').value, '.ics')">Download Event as .ics file</button>
+        </form>
       </div>
       <div id="footer">
         <hr>
