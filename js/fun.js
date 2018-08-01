@@ -37,6 +37,10 @@ function createCalendar(){
   }else if (endMinutes == 0){endMinutes = "00"}
   var EndTime = endHours + endMinutes + '00';
 
+  if(document.getElementById("chcRrule").checked == false)
+  {var theString = 'DTEND;VALUE=DATE:' + EndDate + "T" + EndTime;}
+  else{var theString = rruleString();}
+
   //Creating the content of the event file.
   var SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
   var calendarStart = [
@@ -58,7 +62,7 @@ function createCalendar(){
       'DESCRIPTION:' + document.getElementById('txtDescription').value,
       'DTSTAMP:' + yyyy + mm + dd + "T" + hour + minute + second,
       'DTSTART;VALUE=DATE:' + StartDate + "T" + StartTime,
-      'DTEND;VALUE=DATE:' + EndDate + "T" + EndTime,
+      '' + theString,
       'LOCATION:' + document.getElementById('txtLocation').value,
       'SUMMARY;LANGUAGE=en-us:' + document.getElementById('txtSummary').value,
       'TRANSP:TRANSPARENT',
@@ -131,16 +135,23 @@ function bodyOnload(){
   //getNow fills the responsible inputs with current time.
   getNow();
   document.getElementById('chcGeolocation').checked = true;
+  document.getElementById('chcRrule').checked = false;
+  document.getElementById('divRrule').style.display = 'none';
+  document.getElementById('slcByWhat').style.display = 'none';
+  document.getElementById('slcInterval').style.display = 'none';
+  document.getElementById('slcBy2').style.display = 'none';
+  document.getElementById('txtUntil').style.display = 'none';
+  document.getElementById('txtCount').style.display = 'none';
   //Binds the autocomplete function to the input
   bindGeo();
   //Fills the File Name textbox' value with dummy text
   document.getElementById('txtFileName').value = "NewEvent";
-  document.getElementById('slcClass').options[document.getElementById('slcClass').selectedIndex].value = 'PUBLIC'
+  document.getElementById('slcClass').options[document.getElementById('slcClass').selectedIndex].value = 'PUBLIC';
   if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     }else {
         document.getElementById('lblGeolocation').innerHTML = "Geolocation is not supported by this browser.";
-    }
+  }
 }
 
 function showPosition(position) {
@@ -200,26 +211,26 @@ function validation(elem){
   if (elem.id == "txtDescription" || elem.id == "txtSummary" || elem.id == "txtLocation" || elem.id == "txtStartDate")
   {
     if (elem.value == "")
-    {
-      errorflag = false;
-    }
+    {errorflag = false;}
   }
   //Check if Start Time hours and End Time hours are empty or filled with wrong information
   else if (elem.id == "txtStartTimeHours" || elem.id == "txtEndTimeHours")
   {
     if (elem.value == "" || elem.value < 0 || elem.value > 23)
-    {
-      errorflag = false;
-    }
+    {errorflag = false;}
   }
   //Check if Start Time minutes and End Time minutes are empty or filled with wrong information
   else if (elem.id == "txtStartTimeMinutes" || elem.id == "txtEndTimeMinutes")
   {
     var val = parseInt(elem.value);
     if (elem.value == "" || val < 0 || val > 59)
-    {
-      errorflag = false;
-    }
+    {errorflag = false;}
+  }
+  //Check if Interval and Count are empty or filled with wrong information
+  else if (elem.id == "txtInterval" || elem.id == "txtCount")
+  {
+    if(elem.value == "" || isNaN(elem.value) == true || elem.value <= 0)
+    {errorflag = false;}
   }
   //Check to see if End Date is later or equal to Start Date
   else if (elem.id == "txtEndDate")
@@ -250,9 +261,37 @@ function validation(elem){
       }
       else{errorflag = false;}
     }
-    else {
-      errorflag = false;
+    else {errorflag = false;}
+  }
+  else if (elem.id == "txtUntil")
+  {
+    if(elem != "" && document.getElementById('txtStartDate').value != "")
+    {
+      var par = String(document.getElementById('txtStartDate').value).split('-');
+      var syear = parseInt(par[0]);
+      var smonth = parseInt(par[1]);
+      var sday = parseInt(par[2]);
+      var par = String(elem.value).split('-');
+      var eyear = parseInt(par[0]);
+      var emonth = parseInt(par[1]);
+      var eday = parseInt(par[2]);
+      if (eyear > syear)
+      {errorflag = true;}
+      else if (eyear == syear)
+      {
+        if (emonth > smonth)
+        {errorflag = true;}
+        else if (emonth == smonth)
+        {
+          if (eday >= sday)
+          {errorflag = true;}
+          else {errorflag = false;}
+        }
+        else{errorflag = false;}
+      }
+      else{errorflag = false;}
     }
+    else {errorflag = false;}
   }
   if(errorflag == true)
   {elem.style.borderColor="#CCCCCC";}
@@ -276,12 +315,13 @@ function blurred(elem){
   {
     if(elem.value < 10 && elem.value != "" && elem.value > 0)
     {elem.value = String('0'+ parseInt(elem.value));}
-    else if (elem.value == 0){elem.value = "00"}
+    else if (elem.value == "0"){elem.value = "00"}
   }
   if (errorflag == true)
   {
     elem.style.borderColor="#CCCCCC";
-  }else {
+  }
+  else {
     if (elem.id == "txtStartDate")
     {
       document.getElementById('txtEndDate').style.borderColor="#EC3C3C";
@@ -319,4 +359,222 @@ function getTZID(){
   var tz = jstz.determine(); // Determines the time zone of the browser client
   var timezone = tz.name();
   return timezone;
+}
+
+function rruleClick(){
+  var errorflag = false;
+  //errorflags array is used for validation off all inputs in the page
+  var errorflags = [];
+  var elements = bringElements();
+  //Validate to see if there are any errors in inputs
+  for (var i = 0; i < elements.length; i++) {
+    errorflag = validation(elements[i]);
+    if (errorflag == false)
+    {errorflags.push(errorflag);}
+  }
+  //If there are no errors, download the file whether it has a filename or not
+  if (errorflags.length == 0)
+  {
+    if(document.getElementById('chcRrule').checked == false)
+    {document.getElementById('divRrule').style.display = 'none';}
+    else{
+    document.getElementById('divRrule').style.display = 'block';}
+  }else{
+    alert("Please check the information");
+    document.getElementById('chcRrule').checked = false;
+  }
+}
+
+function rruleString(){
+  var slcF = document.getElementById('slcFreq');
+  var slcB = document.getElementById('slcByWhat');
+  var slcI = document.getElementById('slcInterval');
+  var slcW = document.getElementById('slcBy2');
+  var slcR = document.getElementById('slcRepeat');
+  var rrule = 'RRULE:';
+  rrule = rrule + 'FREQ=' + slcF.options[slcF.selectedIndex].value;
+  if (slcF.options[slcF.selectedIndex].text == "Daily")
+  {rrule = rrule + ';INTERVAL=' + slcI.options[slcI.selectedIndex].value;}
+  else if (slcF.options[slcF.selectedIndex].text == "Weekly")
+  {rrule = rrule + ';INTERVAL=' + slcI.options[slcI.selectedIndex].value + ';BYDAY=' + slcB.options[slcB.selectedIndex].value}
+  else if (slcF.options[slcF.selectedIndex].text == "Monthly by Day")
+  {rrule = rrule + ';INTERVAL=' + slcI.options[slcI.selectedIndex].value + ';BYDAY=' + slcB.options[slcB.selectedIndex].value}
+  else if (slcF.options[slcF.selectedIndex].text == "Monthly by Date")
+  {rrule = rrule + ';INTERVAL=' + slcI.options[slcI.selectedIndex].value + ';BYMONTHDAY=' + slcB.options[slcB.selectedIndex].value}
+  else if (slcF.options[slcF.selectedIndex].text == "Yearly by Day")
+  {rrule = rrule + ';INTERVAL=' + slcI.options[slcI.selectedIndex].value + ';BYDAY=' + slcB.options[slcB.selectedIndex].value + ';BYMONTHDAY=' + slcW.options[slcW.selectedIndex].value}
+  else if (slcF.options[slcF.selectedIndex].text == "Yearly by Date")
+  {rrule = rrule + ';INTERVAL=' + slcI.options[slcI.selectedIndex].value + ';BYMONTH=' + slcB.options[slcB.selectedIndex].value + ';BYMONTHDAY=' + slcW.options[slcW.selectedIndex].value}
+
+  if(slcR.options[slcR.selectedIndex].value == "UNTIL")
+  {
+    var p = document.getElementById('txtUntil').value.split('-');
+    rrule = rrule + ';UNTIL=' + p[0] + p[1] + p[2] + "T000000Z";
+  }else if(slcR.options[slcR.selectedIndex].value == "OC")
+  {
+    rrule = rrule + ';COUNT=' + document.getElementById('txtCount').value;
+  }
+
+  return rrule;
+}
+
+function slcFreqChanged(elem){
+  var sl = document.getElementById('slcByWhat');
+  var sl2 = document.getElementById('slcInterval');
+  var sl3 = document.getElementById('slcBy2');
+  sl.innerHTML = "";
+  sl2.innerHTML = "";
+  sl3.innerHTML = "";
+  var weekdays = [['Monday', 'MO'], ['Tuesday', 'TU'], ['Wednesday', 'WE'], ['Thursday', 'TH'], ['Friday', 'FR'],  ['Saturday', 'SA'], ['Sunday', 'SU']];
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var prefix = [["First", "1"], ["Second", "2"], ["Third", "3"], ["Fourth", "4"], ["Last", "-1"]];
+  if(elem.options[elem.selectedIndex].value == "DAILY")
+  {
+    sl.style.display = 'none';
+    sl2.style.display = 'block';
+    sl3.style.display = 'none';
+    for (var i = 0; i < 30; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "Every day"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "Every other day"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "Every 3rd day"; opt.value = i + 1;}
+      else{opt.text = "Every " + (i + 1) + "th day"; opt.value = i + 1;}
+      sl2.add(opt);
+    }
+  }
+  else if(elem.options[elem.selectedIndex].value == "WEEKLY")
+  {
+    sl.style.display = 'block';
+    sl2.style.display = 'block';
+    sl3.style.display = 'none';
+    for (var i = 0; i < 7; i++) {
+      var opt = document.createElement("option");
+      opt.text = weekdays[i][0];
+      opt.value = weekdays[i][1];
+      sl.add(opt);
+    }
+    for (var i = 0; i < 26; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "Every week"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "Every other week"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "Every 3rd week"; opt.value = i + 1;}
+      else{opt.text = "Every " + (i + 1) + "th week"; opt.value = i + 1;}
+      sl2.add(opt);
+    }
+  }
+  else if(elem.options[elem.selectedIndex].text == "Monthly by Day")
+  {
+    sl.style.display = 'block';
+    sl2.style.display = 'block';
+    sl3.style.display = 'none';
+    for (var i = 0; i < 5; i++) {
+      for (var j = 0; j < 7; j++) {
+        var opt = document.createElement("option");
+        opt.text = prefix[i][0] + " " + weekdays[j][0];
+        opt.value = prefix[i][1] + weekdays[j][1];
+        sl.add(opt);
+      }
+    }
+    for (var i = 0; i < 11; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "Every month"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "Every other month"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "Every 3rd month"; opt.value = i + 1;}
+      else{opt.text = "Every " + (i + 1) + "th month"; opt.value = i + 1;}
+      sl2.add(opt);
+    }
+  }
+  else if(elem.options[elem.selectedIndex].text == "Monthly by Date")
+  {
+    sl.style.display = 'block';
+    sl2.style.display = 'block';
+    sl3.style.display = 'none';
+    for (var i = 0; i < 31; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "1st day"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "2nd day"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "3rd day"; opt.value = i + 1;}
+      else{opt.text = (i + 1) + "th day"; opt.value = i + 1;}
+      sl.add(opt);
+    }
+    for (var i = 0; i < 11; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "Every month"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "Every other month"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "Every 3rd month"; opt.value = i + 1;}
+      else{opt.text = "Every " + (i + 1) + "th month"; opt.value = i + 1;}
+      sl2.add(opt);
+    }
+  }
+  else if(elem.options[elem.selectedIndex].text == "Yearly by Day")
+  {
+    sl.style.display = 'block';
+    sl2.style.display = 'block';
+    sl3.style.display = 'block';
+    for (var i = 0; i < 10; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "Every 1st year"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "Every other year"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "Every 3rd year"; opt.value = i + 1;}
+      else{opt.text = "Every " + (i + 1) + "th year"; opt.value = i + 1;}
+      sl2.add(opt);
+    }
+    for (var i = 0; i < 12; i++) {
+      var opt = document.createElement("option");
+      opt.text = months[i]; opt.value = i + 1;
+      sl3.add(opt);
+    }
+    for (var i = 0; i < 5; i++) {
+      for (var j = 0; j < 7; j++) {
+        var opt = document.createElement("option");
+        opt.text = prefix[i][0] + " " + weekdays[j][0];
+        opt.value = prefix[i][1] + weekdays[j][1];
+        sl.add(opt);
+      }
+    }
+  }
+  else if(elem.options[elem.selectedIndex].text == "Yearly by Date")
+  {
+    sl.style.display = 'block';
+    sl2.style.display = 'block';
+    sl3.style.display = 'block';
+    for (var i = 0; i < 10; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "Every year"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "Every other year"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "Every 3rd year"; opt.value = i + 1;}
+      else{opt.text = "Every " + (i + 1) + "th year"; opt.value = i + 1;}
+      sl2.add(opt);
+    }
+    for (var i = 0; i < 12; i++) {
+      var opt = document.createElement("option");
+      opt.text = months[i]; opt.value = i + 1;
+      sl.add(opt);
+    }
+    for (var i = 0; i < 31; i++) {
+      var opt = document.createElement("option");
+      if (i == 0){opt.text = "1st day"; opt.value = i + 1;}
+      else if (i == 1){opt.text = "2nd day"; opt.value = i + 1;}
+      else if (i == 2){opt.text = "3rd day"; opt.value = i + 1;}
+      else{opt.text = (i + 1) + "th day"; opt.value = i + 1;}
+      sl3.add(opt);
+    }
+  }
+}
+
+function sclRepeatChanged(e){
+  if(e.options[e.selectedIndex].value == "UNTIL")
+  {
+    document.getElementById('txtUntil').style.display = 'inline';
+    document.getElementById('txtCount').style.display = 'none';
+  }
+  else if(e.options[e.selectedIndex].value == "OC")
+  {
+    document.getElementById('txtUntil').style.display = 'none';
+    document.getElementById('txtCount').style.display = 'inline';
+  }
+  else {
+    document.getElementById('txtUntil').style.display = 'none';
+    document.getElementById('txtCount').style.display = 'none';
+  }
 }

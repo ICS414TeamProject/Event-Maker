@@ -57,6 +57,17 @@ Version 1.0 (Alpha Version)
   - TZID added
   * This Version's output file has no errors or warnings on icalendar validation.
 
+Version 1.0.1
+  - Rrule chechbox added
+  - Validation added to Rrule checkbox controls
+
+Version 1.0.2
+  - Frequency added to Rrule
+  - End Date and End Time is used as UNTIL in Rrule
+  - Count added to Rrule
+  - Interval added to Rrule
+  - Weekday added to Rrule
+
 Bug Fixes:
   - Validation, infinite zero addition in onblur function fixed
 
@@ -70,6 +81,6 @@ To Do:
 	(Done in V-0.5)- Add File name input
 	(Done in V-1.0)- Classification ****important
 	(Done in V-1.0)- Priority ****important
+  (Done in V-1.0.1)- RRULE ******important
 	- Mailto functionality *****(No possible way to achieve it with HTML and JS only)
 	- Help items
-	- RRULE ******important
