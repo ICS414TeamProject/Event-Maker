@@ -216,14 +216,14 @@ function validation(elem){
   //Check if Start Time hours and End Time hours are empty or filled with wrong information
   else if (elem.id == "txtStartTimeHours" || elem.id == "txtEndTimeHours")
   {
-    if (elem.value == "" || elem.value < 0 || elem.value > 23)
+    if (elem.value == "" || elem.value < 0 || elem.value > 23 || isNaN(elem.value) == false)
     {errorflag = false;}
   }
   //Check if Start Time minutes and End Time minutes are empty or filled with wrong information
   else if (elem.id == "txtStartTimeMinutes" || elem.id == "txtEndTimeMinutes")
   {
     var val = parseInt(elem.value);
-    if (elem.value == "" || val < 0 || val > 59)
+    if (elem.value == "" || val < 0 || val > 59 || isNaN(elem.value) == false)
     {errorflag = false;}
   }
   //Check if Interval and Count are empty or filled with wrong information
@@ -313,7 +313,7 @@ function blurred(elem){
   }
   if (elem.id == "txtStartTimeHours" || elem.id == "txtStartTimeMinutes" || elem.id == "txtEndTimeHours" || elem.id == "txtEndTimeMinutes")
   {
-    if(elem.value < 10 && elem.value != "" && elem.value > 0)
+    if(elem.value < 10 && elem.value != "" && elem.value > 0 && isNaN(elem.value) == false)
     {elem.value = String('0'+ parseInt(elem.value));}
     else if (elem.value == "0"){elem.value = "00"}
   }
