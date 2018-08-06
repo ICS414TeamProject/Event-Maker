@@ -70,6 +70,7 @@ Version 1.0.2
 
 Bug Fixes:
   - Validation, infinite zero addition in onblur function fixed
+  - Validation, character entry to time inputs fixed
 
 To Do:
 	(Done in V-0.2)- Styling the HTML. Adding a .css file to the source
