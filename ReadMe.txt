@@ -82,6 +82,6 @@ To Do:
 	(Done in V-0.5)- Add File name input
 	(Done in V-1.0)- Classification ****important
 	(Done in V-1.0)- Priority ****important
-  (Done in V-1.0.1)- RRULE ******important
+  	(Done in V-1.0.1)- RRULE ******important
 	- Mailto functionality *****(No possible way to achieve it with HTML and JS only)
 	- Help items
